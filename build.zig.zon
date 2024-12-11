@@ -1,6 +1,6 @@
 .{
-    .name = "cexception_zig",
-    .version = "0.0.0",
+    .name = "unity_zig",
+    .version = "0.1.0",
     .dependencies = .{
         .Unity= .{
             .url = "https://github.com/ThrowTheSwitch/Unity/archive/refs/tags/v2.6.0.tar.gz",
