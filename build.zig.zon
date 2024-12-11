@@ -1,0 +1,14 @@
+.{
+    .name = "cexception_zig",
+    .version = "0.0.0",
+    .dependencies = .{
+        .Unity= .{
+            .url = "https://github.com/ThrowTheSwitch/Unity/archive/refs/tags/v2.6.0.tar.gz",
+            .hash = "12201e3a9c8c6bec65094011fc848fcd6c8f1c0268da7fe64c71edc93820a5a367fd",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+    },
+}
