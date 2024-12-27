@@ -5,6 +5,9 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const fixture = b.option(bool, "fixture", "build fixture addon") orelse true;
+    const memory = b.option(bool, "memory", "build memory addon") orelse fixture;
+
     // create static library
     const unity = b.addStaticLibrary(.{
         .name = "unity",
@@ -20,6 +23,23 @@ pub fn build(b: *std.Build) void {
     unity.installHeader(unity_dep.path("src/unity_internals.h"), "unity_internals.h");
     unity.addIncludePath(unity_dep.path("src"));
 
+    if (memory) {
+        unity.addCSourceFile(.{
+            .file = unity_dep.path("extras/memory/src/unity_memory.c"),
+            .flags = &FLAGS,
+        });
+        unity.addIncludePath(unity_dep.path("extras/memory/src"));
+        unity.installHeader(unity_dep.path("extras/memory/src/unity_memory.h"), "unity_memory.h");
+    }
+    if (fixture) {
+        unity.addCSourceFile(.{
+            .file = unity_dep.path("extras/fixture/src/unity_fixture.c"),
+            .flags = &FLAGS,
+        });
+        unity.addIncludePath(unity_dep.path("extras/fixture/src"));
+        unity.installHeader(unity_dep.path("extras/fixture/src/unity_fixture.h"), "unity_fixture.h");
+        unity.installHeader(unity_dep.path("extras/fixture/src/unity_fixture_internals.h"), "unity_fixture_internals.h");
+    }
     b.installArtifact(unity);
 }
 
