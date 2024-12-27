@@ -14,7 +14,7 @@ After that you can link `Unity` with your project by adding the following
 lines to your `build.zig`
 
 ```zig
-const unity_dep = b.dependency("Unity_zig", .{
+const unity_dep = b.dependency("unity_zig", .{
   .target = target,
   .optimize = optimize,
 });
